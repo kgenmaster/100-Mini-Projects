@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(135deg, #a84d54, #1e345a);
+            font-family:'Trebuchet MS', sans-serif;
+            letter-spacing: 2px;
+            color: white;
+            gap: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.082);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .display {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .controllers {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1.2em;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .startbtn {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+        }
+
+        .startbtn:hover {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            box-shadow: 0 0 20px rgba(0, 176, 155, 0.6);
+        }
+
+        .pausebtn {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+
+        .pausebtn:hover {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.6);
+        }
+
+        .resetbtn {
+            background: linear-gradient(135deg, #afa6b9, #435e8d);
+        }
+
+        .resetbtn:hover {
+            background: linear-gradient(135deg, #afa6b9, #435e8d);
+            box-shadow: 0 0 20px rgba(163, 141, 187, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="title">Stop Watch</p>
+        <div class="display" role="timer">00:00:00:00</div>
+        <div class="controllers">
+            <button type="button" class="btn startbtn" onclick="startTimer()">Start</button>
+            <button type="button" class="btn pausebtn" onclick="pauseTimer()">Pause</button>
+            <button type="button" class="btn resetbtn" onclick="resetTimer()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.querySelector('.display');
+        const startbtn = document.querySelector('.startbtn');
+        const pausebtn = document.querySelector('.pausebtn');
+        const resetbtn = document.querySelector('.resetbtn');
+
+        let isRunning = false;
+        let timerIdentifier = null;
+        let startTime = 0;
+        let elapsedTime = 0;
+
+        function startTimer() {
+            if (!isRunning) {
+                startTime = Date.now() - elapsedTime;
+                timerIdentifier = setInterval(updateTimer, 10);
+                isRunning = true;
+            }
+        }
+
+        function updateTimer() {
+            const currentTime = Date.now();
+            elapsedTime = currentTime - startTime;
+
+            let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+            let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+            let seconds = Math.floor((elapsedTime / 1000) % 60);
+            let milliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+            hours = String(hours).padStart(2, '0');
+            minutes = String(minutes).padStart(2, '0');
+            seconds = String(seconds).padStart(2, '0');
+            milliseconds = String(milliseconds).padStart(2, '0');
+
+            display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timerIdentifier);
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerIdentifier);
+            isRunning = false;
+            elapsedTime = 0;
+            display.textContent = "00:00:00:00";
+        }
+    </script>
+</body>
+</html>
