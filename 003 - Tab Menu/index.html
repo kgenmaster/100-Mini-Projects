@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Languages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff, #a1b2ce);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-evenly;
+            list-style: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs li {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.5s ease;
+        }
+
+        .tabs li:hover {
+            background: linear-gradient(135deg, #969696, #474747);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .note {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .note.active {
+            display: block;
+        }
+
+        .note h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .note p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0.1;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="tabs">
+            <li class="pythonbtn">Python</li>
+            <li class="javabtn">Java</li>
+            <li class="javascriptbtn">JavaScript</li>
+            <li class="cplusplusbtn">C++</li>
+        </ul>
+    </nav>
+    <main>
+        <div class="note python active">
+            <h1>Python</h1>
+            <p>Python is a high-level, interpreted programming language known for its readability and versatility. It emphasizes code readability with its clean syntax, making it easier to learn and use. Python supports various programming paradigms, including object-oriented, imperative, and functional programming.</p>
+        </div>
+
+        <div class="note java">
+            <h1>Java</h1>
+            <p>Java is a general-purpose, object-oriented programming language designed to be platform-independent, meaning it can run on any system with a Java Virtual Machine (JVM). Java is known for its robustness, reliability, and security features, making it a popular choice for enterprise-level applications.</p>
+        </div>
+
+        <div class="note javascript">
+            <h1>JavaScript</h1>
+            <p>JavaScript is also used in server-side development with Node.js, allowing developers to build full-stack web applications. Its widespread use and large community make it a crucial language for web developers.</p>
+        </div>
+
+        <div class="note cplusplus">
+            <h1>C++</h1>
+            <p>C++ supports various programming paradigms, including procedural, object-oriented, and generic programming. Its complexity and low-level access make it a challenging language to master, but its capabilities and performance make it a valuable tool for experienced programmers.</p>
+        </div>
+    </main>
+
+    <script>
+        const tabs = document.querySelectorAll('.tabs li');
+        const notes = document.querySelectorAll('.note');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                notes.forEach(note => {
+                    note.classList.remove('active');
+                });
+
+                const targetClass = tab.className.replace('btn', '');
+                const targetNote = document.querySelector(`.note.${targetClass}`);
+
+                if (targetNote) {
+                    targetNote.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
