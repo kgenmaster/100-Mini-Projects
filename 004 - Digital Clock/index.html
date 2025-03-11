@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            color: beige;
+            margin: 0;
+        }
+        body {
+            background-color: #000000;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock {
+            font-size: 3.5em;
+            font-family: Orbitron;
+            width: 6.5em;
+            background: linear-gradient(50deg, rgb(75, 123, 179), rgb(205, 255, 213));
+        }
+        .clock {
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- #20C20E -->
+    <p class="clock"></p>
+    <script>
+        const clock = document.querySelector('.clock')
+
+        function count () {
+            const time = new Date ()
+            const h = String(time.getHours()).padStart(2, '0')
+            const m = String(time.getMinutes()).padStart(2, '0')
+            const s = String(time.getSeconds()).padStart(2, '0')
+
+            const html = `${h} : ${m} : ${s}`
+            clock.innerHTML = html
+        }
+
+        setInterval (count, 1000)
+    </script>
+</body>
+</html>
