@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fascinating World Facts</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #fdf6e3; /* Solarized Light Base3 */
+            color: #657b83; /* Solarized Base00 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            background: #eee8d5; /* Solarized Light Base2 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #268bd2; /* Solarized Blue */
+        }
+
+        /* Main Content Styling */
+        main {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .note {
+            background: #eee8d5; /* Solarized Light Base2 */
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #93a1a1; /* Solarized Base1 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .note:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: #268bd2; /* Solarized Blue */
+        }
+
+        .note h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #cb4b16; /* Solarized Orange */
+            margin-bottom: 0.5rem;
+        }
+
+        .note p {
+            font-size: 1.1rem;
+            color: #586e75; /* Solarized Base01 */
+            opacity: 0.9;
+        }
+
+        /* Progress Bar Styling */
+        .Hscrollbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #eee8d5; /* Solarized Light Base2 */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            height: 6px;
+            background: #859900; /* Solarized Green */
+            width: 0;
+            transition: width 0.2s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .note h1 {
+                font-size: 1.5rem;
+            }
+
+            .note p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Did You Know? Fascinating World Facts</h1>
+    </header>
+
+    <main>
+        <div class="note">
+            <h1>Cats Have a Unique "Meow" Language</h1>
+            <p>Did you know that cats primarily meow to communicate with humans, not other cats? Each cat's meow is unique, and they often develop specific sounds to get their owner's attention.</p>
+        </div>
+
+        <div class="note">
+            <h1>Bananas Are Berries, but Strawberries Aren't</h1>
+            <p>Botanically speaking, bananas qualify as berries because they develop from a single ovary. Surprisingly, strawberries don't make the cut because they form from multiple ovaries.</p>
+        </div>
+
+        <div class="note">
+            <h1>The Eiffel Tower Can Grow Taller in Summer</h1>
+            <p>Due to thermal expansion, the Eiffel Tower can grow up to 6 inches taller during the summer months when the metal expands in the heat.</p>
+        </div>
+
+        <div class="note">
+            <h1>Octopuses Have Three Hearts</h1>
+            <p>An octopus has three hearts: two pump blood to the gills, and one pumps it to the rest of the body. Interestingly, the heart that pumps to the body stops beating when the octopus swims.</p>
+        </div>
+
+        <div class="note">
+            <h1>Honey Never Spoils</h1>
+            <p>Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible. Honey's natural composition makes it resistant to bacteria and spoilage.</p>
+        </div>
+
+        <div class="note">
+            <h1>Sharks Existed Before Trees</h1>
+            <p>Sharks have been around for more than 400 million years, while trees appeared about 350 million years ago. That means sharks were swimming in the oceans long before trees covered the land.</p>
+        </div>
+
+        <div class="note">
+            <h1>Your Stomach Gets a New Lining Every 3-4 Days</h1>
+            <p>The stomach's lining is constantly replaced to prevent it from digesting itself. If it didn't, the strong acids would damage the stomach tissue.</p>
+        </div>
+
+        <div class="note">
+            <h1>Wombat Poop Is Cube-Shaped</h1>
+            <p>Wombats produce cube-shaped feces to prevent it from rolling away. This unique shape helps them mark their territory more effectively.</p>
+        </div>
+
+        <div class="note">
+            <h1>The Longest Recorded Flight of a Chicken</h1>
+            <p>The longest recorded flight of a chicken is 13 seconds. While chickens aren't known for their flying abilities, they can manage short bursts of flight.</p>
+        </div>
+
+        <div class="note">
+            <h1>There Are More Stars Than Grains of Sand on Earth</h1>
+            <p>The universe contains more stars than there are grains of sand on all the beaches and deserts on Earth. It's a mind-boggling comparison of scale!</p>
+        </div>
+    </main>
+
+    <div class="Hscrollbar">
+        <div class="progress"></div>
+    </div>
+
+    <script>
+        let progressBar = document.querySelector(".Hscrollbar .progress");
+
+        let scrollHeight =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+        window.addEventListener("scroll", scroll);
+
+        function scroll() {
+        let scrollStart = document.documentElement.scrollTop;
+        let scrolled = (scrollStart / scrollHeight) * 100;
+        progressBar.style.width = `${scrolled}%`;
+        }
+    </script>
+</body>
+</html>
