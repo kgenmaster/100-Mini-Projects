@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+        .step {
+            border: 5px solid #d1d1d1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #a1a1a1;
+            background-color: white;
+            transition: all 0.3s ease;
+            cursor: default;
+            position: relative;
+        }
+        .step::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .step:hover::after {
+            opacity: 1;
+        }
+        .step.activeStep {
+            border-color: #7bff7b;
+            color: #7bff7b;
+            box-shadow: 0 0 10px rgba(123, 255, 123, 0.5);
+        }
+        .step.completedStep {
+            border-color: #7bff7b;
+            color: #7bff7b;
+            background-color: #eafaea;
+        }
+        .wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #d1d1d1, #eaeaea);
+            z-index: -1;
+            transform: translateY(-50%);
+        }
+        .progressbar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(to right, #7bff7b, #aaffaa);
+            z-index: -1;
+            transform: translateY(-50%);
+            transition: width 0.5s ease;
+        }
+        .controllers {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            background-color: #7bff7b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #62e662;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn:disabled {
+            background-color: #d1d1d1;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="step activeStep" data-tooltip="Step 1">1</div>
+        <div class="step" data-tooltip="Step 2">2</div>
+        <div class="step" data-tooltip="Step 3">3</div>
+        <div class="step" data-tooltip="Step 4">4</div>
+
+        <div class="progressbar"></div>
+    </div>
+    <div class="controllers">
+        <button class="btn prevbtn">Previous</button>
+        <button class="btn nextbtn">Next</button>
+    </div>
+
+    <script>
+        const progressbar = document.querySelector('.progressbar');
+        const nextbtn = document.querySelector('.nextbtn');
+        const prevbtn = document.querySelector('.prevbtn');
+        const stepsList = document.querySelectorAll('.step');
+
+        const edges = stepsList.length - 1;
+        let currentIndex = 0;
+
+        nextbtn.addEventListener('click', () => {
+            if (currentIndex < edges) {
+                currentIndex++;
+                updateProgressBar();
+            }
+        });
+
+        prevbtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateProgressBar();
+            }
+        });
+
+        function updateProgressBar() {
+            const positionAtPercent = (currentIndex / edges) * 100;
+            progressbar.style.width = `${positionAtPercent}%`;
+            activator();
+        }
+
+        function activator() {
+            stepsList.forEach((step, index) => {
+                if (index < currentIndex) {
+                    step.classList.add('completedStep');
+                    step.classList.remove('activeStep');
+                } else if (index === currentIndex) {
+                    step.classList.add('activeStep');
+                    step.classList.remove('completedStep');
+                } else {
+                    step.classList.remove('activeStep', 'completedStep');
+                }
+            });
+
+            prevbtn.disabled = currentIndex === 0;
+            nextbtn.disabled = currentIndex === edges;
+        }
+
+        // Initialize the progress bar
+        updateProgressBar();
+    </script>
+</body>
+</html>
