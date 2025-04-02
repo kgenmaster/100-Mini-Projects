@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: large;
+        }
+        body {
+            background-image: linear-gradient(240deg, pink, purple);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info {
+            font-size: xx-large;
+            font-family: monospace;
+            color: antiquewhite;
+            margin-bottom: 50px;
+        }
+
+        .search {
+            position: relative;
+        }
+
+        .input {
+            height: 50px;
+            width: 50px;
+            overflow: hidden;
+            padding-left: 20px;
+            border: none;
+            border-radius: 10px;
+            transition: width 300ms;
+        }
+
+
+        .btn {
+            position: absolute;
+            background-color: rgb(221, 221, 221);
+            left: 0;
+            height: 50px;
+            width: 50px;
+            border: none;
+            border-radius: 10px;
+            transition: transform 300ms;
+        }
+        .btn:focus, .input:focus {
+            outline: none;
+        }
+
+        .search.active .input {
+            width: 300px;
+        }
+
+        .search.active .btn {
+            transform: translateX(250px);
+        }
+
+        .searchimg {
+            height: 25px;
+            width: 25px;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+        <h2 class="info">press the search button</h2>
+
+    <div class="search">
+        <input class="input" type="text" placeholder="Search ...">
+        <button class="btn"><img class="searchimg" src="icon/search.png" alt="search"></button>
+    </div>
+
+    <script>
+        const search = document.querySelector('.search')
+        const button = document.querySelector('.btn')
+        let toogle = false
+
+        button.addEventListener ('click', e => {
+            if (toogle === false) {
+                search.classList.add ('active')
+                toogle = true }
+            
+            else {
+                search.classList.remove ('active')
+                toogle = false }
+        })
+    </script>
+</body>
+</html>
