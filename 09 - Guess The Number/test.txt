@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(20, 18, 18);
+        }
+        .wrapper {
+            position: relative;
+            padding: 10px;
+            background: url('Art.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 90%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .dashboard {
+            margin-top: 5%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .hintbtn {
+            background-color: rgb(99, 182, 157);
+            color: black;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 5px;
+        }
+        .submitbtn {
+            background-color: rgb(110, 156, 255);
+            color: black;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        #inputLine {
+            font-size: 1em;
+            background-color: transparent;
+            text-align: center;
+            width: fit-content;
+            border: none;
+            border-bottom: 5px solid rgb(79, 201, 89);
+            outline: none;
+            padding-bottom: 5px;
+            margin: 10px 10px;
+            color: white;
+        }
+        #inputLine::placeholder {
+            font-weight: bold;
+            color: rgb(196, 196, 196);
+        }
+        .score {
+            margin-top: 10px;
+            height: 30px;
+            border: thin solid rgb(116, 116, 116);
+            display: flex;
+            justify-content: space-evenly;
+            font-weight: bold;
+        }
+        .lowerContainer {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            align-items: center;
+        }
+        .message {
+            margin: 10px 0;
+            font-size: 1em;
+            font-weight: bolder;
+        }
+        .emojiReaction {
+            border: thin solid rgb(116, 116, 116);
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+        .resetbtn {
+            background-color: rgb(255, 99, 132);
+            color: black;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Guess The Number</h2>
+
+        <div class="dashboard">
+            <div class="info">
+                <p>Range : 1 to 100</p>
+                <p>Guesses Left : <span id="guessesLeft">5</span></p>
+            </div>
+            <button class="hintbtn">Hint</button>
+        </div>
+
+        <div class="score"></div>
+
+        <div class="lowerContainer">
+            <p class="message">Have a Nice Time Playing!</p>
+            <div class="emojiReaction"></div>
+            <input type="text" id="inputLine" placeholder="Enter a number!">
+            <button class="submitbtn">Submit</button>
+            <button class="resetbtn" style="display: none;">Reset Game</button>
+        </div>
+    </div>
+
+    <script>
+        const target = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+        let counter = 0;
+        const maxTries = 5;
+
+        const scoreBoard = document.querySelector('.score');
+        const inputLine = document.getElementById('inputLine');
+        const submitbtn = document.querySelector('.submitbtn');
+        const message = document.querySelector('.message');
+        const emojiReaction = document.querySelector('.emojiReaction');
+        const resetbtn = document.querySelector('.resetbtn');
+        const guessesLeftElement = document.getElementById('guessesLeft');
+
+        // Initialize score board
+        for (let i = 0; i < maxTries; i++) {
+            const node = document.createElement('span');
+            node.textContent = '_';
+            node.classList.add('tries');
+            scoreBoard.appendChild(node);
+        }
+
+        const tries = document.querySelectorAll('.tries');
+
+        // Submit button logic
+        submitbtn.addEventListener('click', () => {
+            const guessed = parseInt(inputLine.value);
+
+            if (isNaN(guessed) || guessed < 1 || guessed > 100) {
+                message.textContent = 'Please enter a valid number between 1 and 100.';
+                return;
+            }
+
+            counter++;
+            const remainingTries = maxTries - counter;
+            guessesLeftElement.textContent = remainingTries;
+
+            // Update score board
+            tries[counter - 1].textContent = guessed;
+
+            if (guessed === target) {
+                message.textContent = `Congratulations! You guessed the number ${target} in ${counter} tries.`;
+                emojiReaction.textContent = '🎉';
+                disableGame();
+                return;
+            }
+
+            if (counter >= maxTries) {
+                message.textContent = `Game Over! The number was ${target}.`;
+                emojiReaction.textContent = '😔';
+                disableGame();
+                return;
+            }
+
+            if (guessed > target) {
+                message.textContent = 'Too high!';
+            } else {
+                message.textContent = 'Too low!';
+            }
+
+            inputLine.value = ''; // Clear input field
+        });
+
+        // Hint button logic
+        const hintbtn = document.querySelector('.hintbtn');
+        hintbtn.addEventListener('click', () => {
+            const hint = target % 2 === 0 ? 'The number is even.' : 'The number is odd.';
+            message.textContent = hint;
+        });
+
+        // Reset button logic
+        resetbtn.addEventListener('click', () => {
+            location.reload(); // Reload the page to reset the game
+        });
+
+        // Disable game after win/lose
+        function disableGame() {
+            submitbtn.disabled = true;
+            inputLine.disabled = true;
+            hintbtn.disabled = true;
+            resetbtn.style.display = 'inline-block'; // Show reset button
+        }
+    </script>
+</body>
+</html>
