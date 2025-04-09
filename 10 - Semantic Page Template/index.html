@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocService</title>
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f4f6f8;
+        color: #333;
+        }
+
+        .container {
+        display: grid;
+        grid-template-areas:
+            "header  header"
+            "aside   main"
+            "footer  footer";
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: 70px 1fr 60px;
+        height: 100vh;
+        gap: 12px;
+        padding: 12px;
+        }
+
+        header {
+        grid-area: header;
+        background: #1e90ff;
+        color: white;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        aside {
+        grid-area: aside;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        aside ul {
+        list-style: none;
+        }
+
+        aside li {
+        margin: 10px 0;
+        cursor: pointer;
+        transition: color 0.2s;
+        }
+
+        aside li:hover {
+        color: #1e90ff;
+        }
+
+        main {
+        grid-area: main;
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        footer {
+        grid-area: footer;
+        background: #f0f0f0;
+        text-align: center;
+        line-height: 60px;
+        font-size: 14px;
+        border-radius: 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>Doc-Service</header>
+        <aside>
+          <nav>
+            <ul>
+              <li>Dashboard</li>
+              <li>Appointments</li>
+              <li>Doctors</li>
+              <li>Settings</li>
+            </ul>
+          </nav>
+        </aside>
+        <main>
+          <h1>Welcome!</h1>
+          <p>Main content area.</p>
+        </main>
+        <footer>&copy; 2025 DocService. All rights reserved.</footer>
+      </div>
+      
+</body>
+</html>
